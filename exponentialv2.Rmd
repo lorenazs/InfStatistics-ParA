@@ -1,0 +1,77 @@
+Exponential distribution Simulation 
+========================================================
+
+This is the first part of the project for the Statistical inference course.
+The exponential distribution was simulated with the function rexp(n,lambda), using lambda = 0.2
+
+### 0. The simulation
+First run thousand times the simulated data for n=40, lambda=0.2 and stored the mean of each sample in a vector
+
+```{r,echo=TRUE}
+
+    lambda = 0.2
+    n= 40
+    times = 1000
+    
+     vectMeans<- NULL
+     vectVar<-NULL
+     vectStDev<-NULL
+
+    samples <- replicate(times,rexp(n,lambda))
+
+    for (i in 1:times)
+      {
+         vectMeans <- c(vectMeans,mean(samples[,i])
+         vectVar <- c(vectVar,var(samples[,i]))
+         vectStDev<-c(vectStDev, sd(samples[,i]))
+      }
+     
+     
+#     vectAllData<-NULL
+#     
+#     for (i in 1:1000){
+#      expoData <- rexp(n,lambda)
+#      vectMeans <- c(vectMeans,mean(expoData))
+#      vectVar <- c(vectVar,var(expoData))
+#      vectStDev<-c(vectStDev, sd(expoData))
+#      vectAllData <- c(vectAllData,expoData)
+# }
+    
+```
+
+### 1. Where the distribution is centered at and compare it to the theoretical center of the distribution
+
+```{r, echo=TRUE}
+     theMean<-mean(vectMeans)
+     theDensity <- density(vectMeans)
+     plot(theDensity)
+```
+The mean of the simulated data was `r theMean` , which is very close to the theoretical center of the distribution: 1/0.2=5
+
+### 2.  How variable it is and compare it to the theoretical variance of the distribution
+The theoretical variance for the exponential distribution is 1/(lambda*lambda), in this case: 1/(0.2 * 0.2)=25
+
+```{r, echo=TRUE}
+  
+     variance<- mean(vectVar)
+   
+```
+The variance for the simulated data is `r variance`,  again very close to the theoretical value.
+### 3. Show that the distribution is approximaterly normal
+```{r, echo=TRUE}
+  #hist(expoData)
+```
+### 4.  Evaluate the coverage of the confidence interval
+
+```{r, echo=TRUE}
+# http://www4.stat.ncsu.edu/~boos/slab/slabe/lab7.html
+#        lowL <- theMean - 1.96 * mean(vectStDev)/sqrt(n)
+#        uppL <- theMean - 1.96 * mean(vectStDev)/sqrt(n)
+#        incorrectLow<- length(vectMeans[vectMeans < lowL])
+#        incorrectUpp<- length(vectMeans[uppL < vectMeans])
+#        total<- (incorrectUpp + incorrectLow)/1000
+#        total
+#        incorrectLow
+#        incorrectUpp
+hist(samples)
+```
