@@ -16,4 +16,3 @@ First run thousand times the simulated data for n=40, lambda=0.2 and stored the 
 
 
 
-

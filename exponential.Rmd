@@ -36,6 +36,7 @@ First run thousand times the simulated data for n=40, lambda=0.2 and stored the 
      plot(theDensity)
      abline(v=theMean,col='blue')
 ```
+
 The mean of the simulated data was `r theMean` , which is very close to the theoretical center of the distribution: 1/0.2=5
 
 ### 2.  How variable it is and compare it to the theoretical variance of the distribution
@@ -49,30 +50,37 @@ The theoretical variance for the exponential distribution is 1/(lambda*lambda), 
 The variance for the simulated data is `r variance`,  again very close to the theoretical value.
 ### 3. Show that the distribution is approximaterly normal
 The next graph is a qqplot that evaluates the fit of the sample data with a normal distribution. It uses the theoretical quantiles of the distribution
+
 ```{r, echo=TRUE}
       
      hist(vectMeans)
      
 ```
+
 As seen in the histogram above, the data seems to follow a  normal distribution.
 
 
 ### 4.  Evaluate the coverage of the confidence interval
+Calculates the confidence interval for each sample, then count how many times the population mean it is not in the intervals
 
 ```{r, echo=TRUE}
-   coverage <- array(0,1000) 
-   cs <- array(0,100)
-   for (k in 1:1000)
+   
+    
+   lower <- array(0,times)
+   upper <- array(0,times)
+   
+   
+   for (k in 1:times)
    {
-        oneSample<- samples[,k]
-        MaxiSample <- max(oneSample)
-        MiniSample <- min(oneSample)
-        C = (MaxiSample-MiniSample)/(2*sqrt(n))
+         
+        lower[k] <- vectMeans[k] - (1.96 * vectStDev[k]/sqrt(n))
+        upper[k] <- vectMeans[k] + (1.96 * vectStDev[k]/sqrt(n))
         
-        cinterval <- ((vectMeans[k]-C < 1) & (vectMeans[k] + C > 1))
-        
-        coverage[k]<-mean(cinterval)
      }
-  
+
+   noLower <- length(which(theMean < lower))
+   noUpper <- length(which(upper < theMean))
+   badCases <- (noLower+noUpper)/times
 
 ```
+The coverage of the confidence interval is close to 95%, the population mean it is not in the interval in near `r badCases` , that is near 5%
