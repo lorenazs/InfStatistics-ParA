@@ -35,11 +35,12 @@ for (i in 1:times) {
 theMean <- mean(vectMeans)
 theDensity <- density(vectMeans)
 plot(theDensity)
+abline(v = theMean, col = "blue")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
-The mean of the simulated data was 5.0054 , which is very close to the theoretical center of the distribution: 1/0.2=5
+The mean of the simulated data was 4.9859 , which is very close to the theoretical center of the distribution: 1/0.2=5
 
 ### 2.  How variable it is and compare it to the theoretical variance of the distribution
 The theoretical variance for the exponential distribution is 1/(lambda*lambda), in this case: 1/(0.2 * 0.2)=25
@@ -50,7 +51,7 @@ The theoretical variance for the exponential distribution is 1/(lambda*lambda), 
 variance <- mean(vectVar)
 ```
 
-The variance for the simulated data is 25.1069,  again very close to the theoretical value.
+The variance for the simulated data is 24.7191,  again very close to the theoretical value.
 ### 3. Show that the distribution is approximaterly normal
 The next graph is a qqplot that evaluates the fit of the sample data with a normal distribution. It uses the theoretical quantiles of the distribution
 

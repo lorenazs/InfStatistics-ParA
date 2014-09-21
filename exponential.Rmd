@@ -34,6 +34,7 @@ First run thousand times the simulated data for n=40, lambda=0.2 and stored the 
      theMean<-mean(vectMeans)
      theDensity <- density(vectMeans)
      plot(theDensity)
+     abline(v=theMean,col='blue')
 ```
 The mean of the simulated data was `r theMean` , which is very close to the theoretical center of the distribution: 1/0.2=5
 
